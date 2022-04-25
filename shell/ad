@@ -1,0 +1,812 @@
+Android Programming 2021 - 22
+___________________________________________________________________________
+Program Number 1
+Hello world program (Write a program to Toast Hello World)
+activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+tools:context=".MainActivity">
+<Button
+android:id="@+id/button"
+android:text="Print"
+</androidx.constraintlayout.widget.ConstraintLayout>
+MainActivity.java
+package com.example.hello;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.Toast;
+import android.view.View;
+import android.view.View.OnClickListener;
+public class MainActivity extends AppCompatActivity {
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+Button b=(Button) findViewById(R.id.button) ;
+b.setOnClickListener(new OnClickListener() {
+@Override
+public void onClick(View v) {
+Toast.makeText(getApplicationContext(), "Hello World",
+Toast.LENGTH_SHORT).show();
+}
+});
+}
+}
+______________________________________________________________________
+Program number 2
+Addition of two Numbers (Write a program to add two numbers)
+activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+tools:context=".MainActivity">
+<EditText
+android:id="@+id/e1"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:inputType="number" />
+<EditText
+android:id="@+id/e2"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:inputType="number" />
+<Button
+android:id="@+id/b1"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Add"/>
+<TextView
+android:id="@+id/t1"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+MainActivity.java
+package com.example.sum;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+public class MainActivity extends AppCompatActivity {
+TextView t1;
+Button b1;
+EditText e1;
+EditText e2;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+e1=(EditText) findViewById(R.id.e1);
+e2=(EditText) findViewById(R.id.e2);
+t1=(TextView) findViewById(R.id.t1);
+b1=(Button) findViewById(R.id.b1);
+b1.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View view)
+{
+int a = Integer.parseInt(e1.getText().toString());
+int b = Integer.parseInt(e2.getText().toString());
+int c=a+b;
+t1.setText("Answer = " +String.valueOf(c));
+}
+});
+}
+}
+____________________________________________________________________
+Program Number 3
+Alert Box (Write a program to Display an alert box with OK and Cancel)
+Activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+tools:context=".MainActivity">
+<Button
+android:id="@+id/button"
+android:onClick="dialogevent"
+android:text="Exit"
+</androidx.constraintlayout.widget.ConstraintLayout>
+MainActivity.java
+package com.example.alert;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.widget.Button;
+import android.view.View ;
+public class MainActivity extends AppCompatActivity {
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+}
+public void dialogevent(View view) {
+Button b = (Button) findViewById(R.id.button);
+b.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View v) {
+AlertDialog.Builder dial = new
+AlertDialog.Builder(MainActivity.this);
+dial.setMessage("Do you want to
+quit?").setCancelable(false).setPositiveButton("Yes", new
+DialogInterface.OnClickListener() {
+@Override
+public void onClick(DialogInterface dialog, int which) {
+finish();
+}
+})
+.setNegativeButton("No", new
+DialogInterface.OnClickListener() {
+@Override
+public void onClick(DialogInterface dialog, int which) {
+dialog.cancel();
+}
+});
+AlertDialog alert = dial.create();
+alert.setTitle("Alert Box");
+alert.show();
+}
+});
+}
+}
+_____________________________________________________________
+Program Number 4
+Menu program (Write a program to create menu with 3 menu items)
+example_menu.xml
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/item1"
+android:title ="Item1" />
+<item android:id="@+id/item2"
+android:title ="Item2" />
+<item android:id="@+id/item3"
+android:title ="Item3" />
+</menu>
+MainActivity.java
+package com.example.menu;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
+public class MainActivity extends AppCompatActivity {
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+}
+@Override
+public boolean onCreateOptionsMenu(Menu menu)
+{
+MenuInflater inflater=getMenuInflater();
+inflater.inflate(R.menu.example_menu,menu);
+return true;
+}
+@Override
+public boolean onOptionsItemSelected (MenuItem item)
+{
+switch(item.getItemId()){
+case R.id.item1 :
+Toast.makeText(this,"Item 1
+selected",Toast.LENGTH_SHORT).show();
+return true;
+case R.id.item2 :
+Toast.makeText(this,"Item 2
+selected",Toast.LENGTH_SHORT).show();
+return true;
+case R.id.item3 :
+Toast.makeText(this,"Item 3
+selected",Toast.LENGTH_SHORT).show();
+return true;
+default:
+return super.onOptionsItemSelected(item);
+}
+}
+}
+_____________________________________________________________
+Program Number 5
+RadioButton (Write a program to select gender using radio button)
+Activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+tools:context=".MainActivity">
+<RadioGroup
+android:id="@+id/radio"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+<RadioButton
+android:id="@+id/male"
+android:checked="true"
+android:text="Male" />
+<RadioButton
+android:id="@+id/demale"
+android:text="Female" />
+</RadioGroup>
+<Button
+android:id="@+id/button"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Submit" />
+<TextView
+android:id="@+id/textView"
+android:text="Select Gender" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+MainActivity.java
+package com.example.radio;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
+public class MainActivity extends AppCompatActivity {
+RadioGroup rg;
+RadioButton rb;
+Button b;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+rg = (RadioGroup) findViewById(R.id.radio);
+b = (Button) findViewById(R.id.button);
+b.setOnClickListener(new OnClickListener() {
+@Override
+public void onClick(View v) {
+int selectedId = rg.getCheckedRadioButtonId();
+rb = (RadioButton) findViewById(selectedId);
+Toast.makeText(MainActivity.this, rb.getText(),
+Toast.LENGTH_SHORT).show();
+}
+});
+}
+}
+_____________________________________________________________
+Program Number 6
+Spinner (Write a program to spin the four items)
+Activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+tools:context=".MainActivity">
+<Spinner
+android:id="@+id/spinner"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content" />
+<TextView
+android:id="@+id/textView"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Select District: "/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+Strings.xml
+<resources>
+<string name="app_name">Spinner</string>
+<string-array name="district">
+<item>Kozhikode</item>
+<item>Kannur</item>
+<item>Malappuram</item>
+<item>Thrissur</item>
+</string-array>
+</resources>
+MainActivity.java
+package com.example.spinner;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
+public class MainActivity extends AppCompatActivity implements
+AdapterView.OnItemSelectedListener{
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+Spinner spinner =(Spinner)findViewById(R.id.spinner);
+ArrayAdapter<CharSequence>adapter=ArrayAdapter.createFromResource(th
+is,
+R.array.district,android.R.layout.simple_spinner_item);
+adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_ite
+m);
+spinner.setAdapter(adapter);
+spinner.setOnItemSelectedListener(this);
+}
+@Override
+public void onItemSelected(AdapterView<?> parent, View view, int
+position,long id)
+{
+String text=parent.getItemAtPosition(position).toString();
+Toast.makeText(parent.getContext() ,text,
+Toast.LENGTH_SHORT).show();
+}
+}
+____________________________________________________________________
+Program Number 7
+CheckBox(Write a program to check the items listed)
+Activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+tools:context=".MainActivity">
+<CheckBox
+android:id="@+id/c1"
+android:text="English" />
+<CheckBox
+android:id="@+id/c2"
+android:text="Malayalam"/>
+<CheckBox
+android:id="@+id/c3"
+android:text="Hindi" />
+<TextView
+android:id="@+id/t1"
+android:text="Languages known :" />
+<Button
+android:id="@+id/button"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Submit" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+MainActivity.java
+package com.example.checkbox;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Toast;
+public class MainActivity extends AppCompatActivity {
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+CheckBox english=(CheckBox) findViewById(R.id.c1);
+CheckBox malayalam = (CheckBox) findViewById(R.id.c2);
+CheckBox hindi = (CheckBox) findViewById(R.id.c3);
+Button b= (Button) findViewById(R.id.button);
+b.setOnClickListener(new OnClickListener() {
+@Override
+public void onClick(View v) {
+StringBuffer s = new StringBuffer();
+if(english.isChecked()){
+s.append("English ");
+}
+if(malayalam.isChecked()){
+s.append("\nMalayalam ");
+}
+if(hindi.isChecked()){
+s.append("\nHindi ");
+}
+Toast.makeText(MainActivity.this,
+s.toString(),Toast.LENGTH_LONG).show();
+}
+});
+}
+}
+____________________________________________________________________
+Program Number 8
+Image View(Write a program to Display images from local drive of the
+computer)
+Activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+tools:context=".MainActivity">
+<ImageView
+android:id="@+id/imageView1"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:src="@drawable/inspire" />
+<Button
+android:id="@+id/button1"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Button1"/>
+<Button
+android:id="@+id/button2"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Button2"/>
+<Button
+android:id="@+id/button3"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Button3"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+MainActivity.java
+package com.example.imageview;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.view.View;
+public class MainActivity extends AppCompatActivity implements
+View.OnClickListener {
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+addListenerOnButton();
+}
+public void addListenerOnButton() {
+ImageView image = (ImageView) findViewById(R.id.imageView);
+Button b1 = (Button) findViewById(R.id.button1);
+Button b2 = (Button) findViewById(R.id.button2);
+Button b3 = (Button) findViewById(R.id.button3);
+b1 .setOnClickListener(this);
+b2.setOnClickListener(this);
+b3.setOnClickListener(this);
+}
+@Override
+public void onClick(View v) {
+switch(v.getId()){
+case R.id.button1:
+image.setBackgroundResource(R.drawable.image1);break;
+case R.id.button2:
+image.setBackgroundResource(R.drawable.image2);break;
+case R.id.button3:
+image.setBackgroundResource(R.drawable.image3);break;
+default: break;
+}
+}
+}
+________________________________________________________________
+Program Number 9
+List View (Write a program to display the items in a list)
+Activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+tools:context=".MainActivity">
+<ListView
+android:id="@+id/l1"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+</androidx.constraintlayout.widget.ConstraintLayout>
+MainActivity.java
+package com.example.list;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+public class MainActivity extends AppCompatActivity {
+ListView lst;
+String[] months = {"January", "Feb", "March", "April", "May", "June",
+"July", "August", "September", "October", "November", "December"};
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+lst = (ListView) findViewById(R.id.l1);
+ArrayAdapter<String> arrayadapter = new ArrayAdapter<String>(this,
+android.R.layout.simple_list_item_1,months);
+lst.setAdapter(arrayadapter);
+lst.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+@Override
+public void onItemClick(AdapterView<?> parent, View view, int position,
+long id)
+{
+TextView tv = (TextView) view;
+Toast.makeText(MainActivity.this,tv.getText(),Toast.LENGTH_LONG).show(
+);
+}
+});
+}
+}
+________________________________________________________________
+Program Number 10
+Fetch data from an EditText and display it in a TextView
+Activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+tools:context=".MainActivity">
+<EditText
+android:id="@+id/editText"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:inputType="textPersonName"/>
+<Button
+android:id="@+id/button"
+android:text="Button" />
+<TextView
+android:id="@+id/textView" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+MainActivity.java
+package com.example.fetch;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+public class MainActivity extends AppCompatActivity {
+Button b;
+EditText text1;
+TextView t1;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+b=(Button)findViewById(R.id.button);
+t1=(TextView)findViewById(R.id.t1);
+b.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View v) {
+text1= (EditText)findViewById(R.id.editText);
+t1.setText(text1.getText().toString());
+}
+});
+}
+}
+________________________________________________________________
+Program Number 11
+Write a program to display the multiplication table of a given number.
+Activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+tools:context=".MainActivity">
+<TextView
+android:id="@+id/textView"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"/>
+<EditText
+android:id="@+id/editText"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:inputType="number" />
+<Button
+android:id="@+id/button"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Button"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+MainActivity.java
+package com.example.multiplication;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+public class MainActivity extends AppCompatActivity {
+EditText editText;
+Button button;
+TextView result;
+int ans=0;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+editText=(EditText)findViewById(R.id.editText);
+b=(Button)findViewById(R.id.button);
+result=(TextView)findViewById(R.id.textView);
+b.setOnClickListener(new OnClickListener() {
+@Override
+public void onClick(View v) {
+StringBuffer buffer = new StringBuffer();
+String fs=editText.getText().toString();
+int n = Integer.parseInt(fs);
+for (int i = 1; i <= 10; i++) {
+ans = (i * n);
+buffer.append(i + " * " + n + " = " + ans + "\n");
+result.setText(buffer);
+}
+}
+});
+}
+}
+___________________________________________________________________
+Program Number 12
+Write a program to get IP Address of the device
+Activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+tools:context=".MainActivity">
+<Button
+android:id="@+id/button"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Get IP Address"/>
+<TextView
+android:id="@+id/textView"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+Write a program to get IP Address of the device
+MainActivity.java
+package com.example.getip;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.net.wifi.WifiManager;
+import android.text.format.Formatter;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+public class MainActivity extends AppCompatActivity {
+Button b;
+TextView textview;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+b=(Button)findViewById(R.id.button);
+b.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View v) {
+textview = (TextView) findViewById(R.id.textView);
+WifiManager wifiManager =
+(WifiManager)getApplicationContext().getSystemService(WIFI_SERVICE);
+String ipAddress=
+Formatter.formatIpAddress(wifiManager.getConnectionInfo().getIpAddress());
+textview.setText("Your Device IP Address: " + ipAddress);
+}
+});
+}
+}
+__________________________________________________________________
+Program Number 13
+Write a program to change the background color of the activity
+Activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+tools:context=".MainActivity">
+<RelativeLayout
+android:id="@+id/rl"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+<Button
+android:id="@+id/button"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Change Background Color" />
+</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+MainActivity.java
+package com.example.backcolor;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.graphics.Color;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+public class MainActivity extends AppCompatActivity {
+Button b;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+final RelativeLayout r1 = (RelativeLayout)findViewById(R.id.rl);
+b= (Button)findViewById(R.id.button);
+b.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View arg0) {
+r1.setBackgroundColor(Color.YELLOW);
+}
+});
+}
+}
+___________________________________________________________________
+Program Number 14
+Write a program to change the background image.
+Activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+tools:context=".MainActivity">
+<RelativeLayout
+android:id="@+id/v1"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+<Button
+android:id="@+id/button"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Change Background Image" />
+</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+MainActivity.java
+package com.example.backimage;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import java.util.Random;
+import android.view.View;
+import android.widget.Button;
+public class MainActivity extends AppCompatActivity {
+Button b;
+View screenview;
+int[] images;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+b=(Button)findViewById(R.id.button);
+screenview=findViewById(R.id.v1);
+images=new int[] {R.drawable.image1,R.drawable.image2);
+b.setOnClickListener(new OnClickListener() {
+@Override
+public void onClick(View v) {
+int arrlength = images.length;
+Random rand = new Random();
+int num = rand.nextInt(arrlength);
+screenview.setBackgroundResource(images[num]);
+}
+});
+}
+}
+___________________________________________________________________
+Program Number 15
+Write a program to start another activity from your own activity using intent
+Activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+android:background="@color/colorPrimary"
+tools:context=".MainActivity">
+<Button
+android:id="@+id/button"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Goto Second Activity" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+MainActivity.java
+package com.example.intent;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.content.Intent;
+public class MainActivity extends AppCompatActivity implements
+View.OnClickListener {
+Button b;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+b=findViewById(R.id.button);
+b.setOnClickListener(this);
+}
+@Override
+public void onClick(View v) {
+Intent i=new Intent(MainActivity.this,Main2Activity.class);
+startActivity(i);
+}
+}
+Activity_main2.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+android:background="@color/colorAccent"
+tools:context=".MainActivity">
+<Button
+android:id="@+id/button2"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Goto First Activity" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+Main2Activity.java
+package com.example.intent;
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.content.Intent;
+public class MainActivity extends AppCompatActivity implements
+View.OnClickListener {
+Button b;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+b=findViewById(R.id.button2);
+b.setOnClickListener(this);
+}
+@Override
+public void onClick(View v) {
+Intent i=new Intent(Main2Activity.this,MainActivity.class);
+startActivity(i);
+}
+}
+___________________________________________________________________
+

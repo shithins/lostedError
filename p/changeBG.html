@@ -1,0 +1,18 @@
+<html>
+    <body id = "body">
+      <center>
+            <input type="button" onmouseover="changeBg(0)" value = "red">
+            <input type="button" onmouseover="changeBg(1)" value = "yellow">
+            <input type="button" onmouseover="changeBg(2)" value = "blue">
+            <input type="button" onmouseover="changeBg(3)" value = "green">
+            <input type="button" onmouseover="changeBg(4)" value = "orange">
+
+            <script>
+                function changeBg(i){
+                    const colors = ["red","yellow","blue","green","orange"];
+                    document.body.style.background =colors[i];
+                }
+            </script>
+        </center>
+    </body>
+</html>

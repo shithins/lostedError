@@ -1,0 +1,26 @@
+<html>
+<body>
+<script>
+ var num = parseInt(prompt("enter a number "));
+ var sum= 0;
+ 
+
+ for ( var i = 1; i< num;i++){
+ for ( var j = 0; j<= num;j++){
+ if (i*j==num){
+ sum=sum+i;
+ }
+ }
+ }
+if (sum==num){
+alert ("perfect number");
+}
+else if (sum>num){
+alert ("abundant number");
+}
+else {
+alert ("deficiant number");
+}
+</script>
+</body>
+</html>
